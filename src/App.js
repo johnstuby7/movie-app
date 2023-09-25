@@ -32,6 +32,22 @@ function App() {
     }
   };
 
+  const openDetail = (id) => {
+    axios(apiurl + "&i=" + id).then(({ data }) => {
+      let result = data;
+  
+      setState((prevState) => {
+        return { ...prevState, selected: result };
+      });
+    });
+  };
+  
+  const closeDetail = () => {
+    setState((prevState) => {
+      return { ...prevState, selected: {} };
+    });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
