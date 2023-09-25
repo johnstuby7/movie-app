@@ -1,11 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
 
 function App() {
+  const [state, setState] = useState({
+    s: "sherlock",
+    results: [],
+    selected: {},
+  });
+
+  const apiurl = "https://www.omdbapi.com/?apikey=a2526df0";
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
