@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Search from "./components/Search";
+import Results from "./components/Results";
+import Detail from "./components/Detail";
+import "./App.css";
 
 function App() {
   const [state, setState] = useState({
