@@ -10,23 +10,47 @@ function App() {
 
   const apiurl = "https://www.omdbapi.com/?apikey=a2526df0";
 
+  const searchInput = (e) => {
+    let s = e.target.value;
+  
+    setState((prevState) => {
+      return { ...prevState, s: s };
+    });
+  };
+  
+  const search = (e) => {
+    if (e.key === "Enter") {
+      axios(apiurl + "&s=" + state.s).then(({ data }) => {
+        let results = data.Search;
+  
+        console.log(results);
+  
+        setState((prevState) => {
+          return { ...prevState, results: results };
+        });
+      });
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Movie Mania</h1>
       </header>
+      <main>
+        <Search searchInput={searchInput} search={search} />
+  
+        <Results results={state.results} openDetail={openDetail} />
+  
+        {typeof state.selected.Title != "undefined" ? (
+          <Detail selected={state.selected} closeDetail={closeDetail} />
+        ) : (
+          false
+        )}
+      </main>
     </div>
   );
+}
 }
 
 export default App;
